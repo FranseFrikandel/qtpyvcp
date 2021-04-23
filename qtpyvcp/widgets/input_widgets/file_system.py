@@ -188,7 +188,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def openSelectedItem(self, index=None):
-        """If ngc file, opens in LinuxCNC, if dir displays dir."""
+        """Is a slot.
+        
+        If ngc file, opens in LinuxCNC, if dir displays dir."""
         if index is None:
             selection = self.getSelection()
             if selection is None:
@@ -214,7 +216,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def editSelectedFile(self):
-        """Open the selected file in editor."""
+        """Is a slot.
+        
+        Open the selected file in editor."""
         selection = self.getSelection()
         if selection is not None:
             path = self.model.filePath(selection[0])
@@ -223,7 +227,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def loadSelectedFile(self):
-        """Loads the selected file into LinuxCNC."""
+        """Is a slot.
+        
+        Loads the selected file into LinuxCNC."""
         selection = self.getSelection()
         if selection is not None:
             path = self.model.filePath(selection[0])
@@ -233,7 +239,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def selectPrevious(self):
-        """Select the previous item in the view."""
+        """Is a slot.
+        
+        Select the previous item in the view."""
         selection = self.getSelection()
         if selection is None:
             # select last item in view
@@ -244,7 +252,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def selectNext(self):
-        """Select the next item in the view."""
+        """Is a slot.
+        
+        Select the next item in the view."""
         selection = self.getSelection()
         if selection is None:
             # select first item in view
@@ -255,7 +265,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def rename(self):
-        """renames the selected file or folder"""
+        """Is a slot.
+        
+        renames the selected file or folder"""
         index = self.selectionModel().currentIndex()
         path = self.model.filePath(index)
         if path:
@@ -281,7 +293,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def newFile(self):
-        """Create a new empty file"""
+        """Is a slot.
+        
+        Creates a new empty file."""
         path = self.model.filePath(self.rootIndex())
         new_file_path = os.path.join(path, "New File.ngc")
 
@@ -295,6 +309,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def newFolder(self):
+        """Is a slot.
+        
+        Creates a new folder."""
         path = self.model.filePath(self.rootIndex())
 
         new_name = 'New Folder'
@@ -316,20 +333,22 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def deleteItem(self):
-        """Delete the selected item (either a file or folder)."""
+        """Is a slot.
+        
+        Delete the selected item (either a file or folder)."""
         # ToDo: use Move2Trash, instead of deleting the file
         index = self.selectionModel().currentIndex()
         path = self.model.filePath(index)
         if path:
             file_info = QFileInfo(path)
             if file_info.isFile():
-                if not self.ask_dialog("Do you wan't to delete the selected file?"):
+                if not self.ask_dialog("Do you want to delete the selected file?"):
                     return
                 q_file = QFile(path)
                 q_file.remove()
 
             elif file_info.isDir():
-                if not self.ask_dialog("Do you wan't to delete the selected directory?"):
+                if not self.ask_dialog("Do you want to delete the selected directory?"):
                     return
                 directory = QDir(path)
                 directory.removeRecursively()
@@ -342,7 +361,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot(str)
     def setRootPath(self, root_path):
-        """Sets the currently displayed path."""
+        """Is a slot
+        
+        Sets the currently displayed path."""
 
         self.rootChanged.emit(root_path)
         self.model.setRootPath(root_path)
@@ -352,7 +373,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def viewParentDirectory(self):
-        """View the parent directory of the current view."""
+        """Is a slot.
+        
+        View the parent directory of the current view."""
 
         path = self.model.filePath(self.rootIndex())
 
@@ -412,7 +435,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Slot()
     def getSelection(self):
-        """Returns list of selected indexes, or None."""
+        """Is a slot.
+        
+        Returns list of selected indexes, or None."""
         selection = self.selection_model.selectedIndexes()
         if len(selection) == 0:
             return None
@@ -424,11 +449,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Property(TableType)
     def tableType(self):
-        return self._table_type
-
-    @tableType.setter
-    def tableType(self, table_type):
-        """Sets wether the table shows external devices or local storage
+        """Is a property. 
+        
+        Sets wether the table shows external devices or local storage
         on startup.
         
         When set to local, it first attempts to go to the path defined by
@@ -439,6 +462,10 @@ class FileSystemTable(QTableView, TableType):
         Setting to Remote will open /media/ on startup, where external 
         storage is normally mounted.
         """
+        return self._table_type
+
+    @tableType.setter
+    def tableType(self, table_type):
         self._table_type = table_type
         if table_type == TableType.Local:
             self.setRootPath(self.nc_file_dir)
@@ -447,7 +474,9 @@ class FileSystemTable(QTableView, TableType):
 
     @Property(str)
     def hiddenColumns(self):
-        """String of comma separated column numbers to hide."""
+        """Is a property.
+        
+        String of comma separated column numbers to hide."""
         return self._hidden_columns
 
     @hiddenColumns.setter

@@ -5,7 +5,10 @@ from qtpy.QtCore import Slot, Property
 from qtpyvcp.actions import bindWidget
 
 class ActionSlider(QSlider):
-    """docstring for ActionSlider."""
+    """A action slider that sends a QtPyVCP action with its set value every
+    time it gets changed. Useful for making feedrate override sliders etc.
+    
+    The value sent is set by the QAbstractSlider object in QtDesigner."""
     def __init__(self, parent=None):
         super(ActionSlider, self).__init__(parent)
 

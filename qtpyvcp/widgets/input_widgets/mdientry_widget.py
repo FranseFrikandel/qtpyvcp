@@ -24,7 +24,9 @@ class Validator(QValidator):
 class MDIEntry(QLineEdit, CMDWidget):
     """MDI Entry
 
-    Input any valid g Code. Enter sends the g Code.
+    Input any valid g Code. Enter sends the g Code. Uses issue_mdi action
+    in the background, so it also automatically sets LCNC into MDI mode
+    and sets it back to the mode it was before when finished.
     """
     def __init__(self, parent=None):
         super(MDIEntry, self).__init__(parent)
