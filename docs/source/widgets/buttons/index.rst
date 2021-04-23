@@ -18,3 +18,6 @@ Buttons
 
 .. automodule:: qtpyvcp.widgets.button_widgets.subcall_button
     :members:
+
+.. automodule:: qtpyvcp.widgets.button_widgets.led_button
+    :members:

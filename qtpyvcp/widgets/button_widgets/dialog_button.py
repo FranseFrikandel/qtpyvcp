@@ -28,6 +28,9 @@ class DialogButton(VCPButton):
 
     @Property(str)
     def dialogName(self):
+        """Property for the name of the dialog to open. Uses the name 
+        defined in the YAML file.
+        """
         return self._dialog_name
 
     @dialogName.setter

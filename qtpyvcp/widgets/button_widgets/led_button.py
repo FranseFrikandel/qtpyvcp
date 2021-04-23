@@ -6,6 +6,13 @@ from qtpyvcp.widgets.button_widgets.action_button import ActionButton
 
 
 class LEDButton(ActionButton):
+    """LED Button
+    
+    Integrates a LED into the corner of a button. The LED is controlled 
+    via slots in QtDesigner
+    
+    Otherwise functions the same as an ActionButton.
+    """
 
     RULE_PROPERTIES = ActionButton.RULE_PROPERTIES.copy()
     RULE_PROPERTIES.update({
