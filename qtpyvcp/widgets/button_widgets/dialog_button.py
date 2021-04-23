@@ -1,6 +1,3 @@
-"""Button for launching dialogs.
-"""
-
 from qtpy.QtCore import Property, Slot
 
 from qtpyvcp.widgets import VCPButton
@@ -9,6 +6,8 @@ from qtpyvcp.widgets.dialogs import showDialog
 
 class DialogButton(VCPButton):
     """Dialog Button.
+    
+    Button for launching dialogs.
 
     Args:
         parent (QObject) : The dialog's parent or None.
@@ -28,8 +27,10 @@ class DialogButton(VCPButton):
 
     @Property(str)
     def dialogName(self):
-        """Property for the name of the dialog to open. Uses the name 
-        defined in the YAML file.
+        """Property for the name of the dialog the button triggers (str).
+
+        When this property is set it calls :meth:`QtPyVCP.actions.bindWidget`
+        to bind the widget to the action.
         """
         return self._dialog_name
 

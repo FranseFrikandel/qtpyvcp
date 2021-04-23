@@ -431,7 +431,9 @@ class Mock(object):
 #                  'docopt',
 #                  'dbus')
 
+
 import qtpyvcp.plugins
+
 qtpyvcp.plugins._PLUGINS = mock.MagicMock()
 qtpyvcp.plugins.iterPlugins = mock.MagicMock()
 qtpyvcp.WINDOWS = mock.MagicMock()
