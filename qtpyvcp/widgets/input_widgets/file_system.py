@@ -96,7 +96,14 @@ class RemovableDeviceComboBox(QComboBox):
         if data:
             self._file_locations.ejectDevice(data.get('device'))
 
+
 class FileSystemTable(QTableView, TableType):
+    """FileSystemTable Widget
+    
+    Essentially is a file explorer you can integrate into your VCP, so you
+    can manipulate the filesystem and load files directly inside your VCP
+    without being required to open a popup window.
+    """
 
     if IN_DESIGNER:
         from PyQt5.QtCore import Q_ENUMS
@@ -421,6 +428,17 @@ class FileSystemTable(QTableView, TableType):
 
     @tableType.setter
     def tableType(self, table_type):
+        """Sets wether the table shows external devices or local storage
+        on startup.
+        
+        When set to local, it first attempts to go to the path defined by
+        PROGRAM_PREFIX under [DISPLAY] in the INI file. If this fails it
+        tries ~/linuxcnc/nc_files next, and if this fails it will fall
+        back to your users home folder.
+        
+        Setting to Remote will open /media/ on startup, where external 
+        storage is normally mounted.
+        """
         self._table_type = table_type
         if table_type == TableType.Local:
             self.setRootPath(self.nc_file_dir)

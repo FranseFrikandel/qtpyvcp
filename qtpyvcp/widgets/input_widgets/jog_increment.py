@@ -33,6 +33,17 @@ INFO = Info()
 
 
 class JogIncrementWidget(QWidget):
+    """A widget that automatically generates all the jog increment buttons
+    based on the INCREMENTS parameter under [DISPLAY] in the ini file.
+    
+    The buttons are LedButtons. The diameter, color and alignment properties
+    are also derived from LedButtons.
+    
+    The orientation property sets the direction the buttons are stacked.
+    Horizontal means buttons are placed next to eachother, while vertical
+    means they are stacked on top of eachother. LayoutSpacing defines the 
+    distance between individual buttons.
+    """
 
     def __init__(self, parent=None, standalone=False):
         super(JogIncrementWidget, self).__init__(parent)
